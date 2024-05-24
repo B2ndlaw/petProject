@@ -1,14 +1,6 @@
-import React from 'react';
-import { HomePage } from './components/HomePage';
-
-
-
-
+import React from "react";
+import { HomePage } from "./components/HomePage";
 
 export const App = () => {
-  return (
-    <HomePage text="hello"/>
-  )
-}
-
-
+  return <HomePage text="hello in the Gopher's tavern game" />;
+};
