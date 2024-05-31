@@ -1,6 +1,12 @@
 import React from "react";
-import { HomePage } from "./components/HomePage";
+import { StartPage } from "./components/StartPage";
+import { MainPage } from "./components/MainPage";
 
 export const App = () => {
-  return <HomePage text="hello in the Gopher's tavern game" />;
+  return (
+    <>
+      <StartPage text="Добро пожаловать, дорогой друг!" />
+      <MainPage />
+    </>
+  );
 };
