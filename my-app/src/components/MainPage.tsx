@@ -1,17 +1,20 @@
 import styled from "styled-components";
-import { Content } from "./layers/Content";
+// import { Content } from "./layers/Content";
 import { Menu } from "./layers/Menu";
 import { TextArea } from "./layers/Text";
 import { FightWindow } from "./fight/Fight";
+import { Messages } from "./Messages";
 
 export const MainPage = () => {
   return (
-    <MainPageWrapper>
+    <><MainPageWrapper>
       <Menu />
-      <Content />
-      <FightWindow/>
+      {/* <Content /> */}
+      <FightWindow />
       <TextArea />
-    </MainPageWrapper>
+
+    </MainPageWrapper><Messages /></>
+    
   );
 };
 

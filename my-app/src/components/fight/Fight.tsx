@@ -1,8 +1,4 @@
-//Lists attack & block
-const attackChoice = ["head", "chest", "groin", "legs"];
-const blockChoice = ["head_legs", "head_chest", "chest_groin", "groin_legs"];
-
-//Rules
+//Rules Attack
 //   head: {
 //     head_legs: "miss",
 //     head_chest: "miss",
@@ -28,10 +24,25 @@ const blockChoice = ["head_legs", "head_chest", "chest_groin", "groin_legs"];
 //     groin_legs: "miss",
 //   },
 
+import styled from "styled-components";
+import { Button } from "../Button";
+import { useState } from "react";
+
+//Data warriors
+
+
+
+
+//Lists attack & block
+const attacks = ["head", "chest", "groin", "legs"];
+const blocks = ["head_legs", "head_chest", "chest_groin", "groin_legs"];
+
+
+
 //CPU Attack
 const computerAttackRandomChoice = () => {
   let computerAttackChoice =
-    attackChoice[Math.floor(Math.random() * attackChoice.length)];
+    attacks[Math.floor(Math.random() * attacks.length)];
   return computerAttackChoice;
 };
 
@@ -42,54 +53,70 @@ const rules = {
   legs: ["head_chest", "chest_groin"],
 };
 
-const computerAttack = (cpuAttack: string, playerBlock: string) => {
-  if (rules[cpuAttack].includes(playerBlock)) {
-    return "Hit";
-  } else {
-    return "Miss";
-  }
-};
+// const computerAttack = (cpuAttack: string, playerBlock: string) => {
+//   if (rules[cpuAttack].includes(playerBlock)) {
+//     return "Hit";
+//   } else {
+//     return "Miss";
+//   }
+// };
 
 //PlayerAttack
+const playerAttackChoice = () => {
+
+}
+
 const computerBlockRandomChoice = () => {
-  return blockChoice[Math.floor(Math.random() * blockChoice.length)];
+  return blocks[Math.floor(Math.random() * blocks.length)];
 };
 
-const PlayerAttack = (playerAttack: string, cpuBlock: string) => {
-  if (rules[playerAttack].includes(cpuBlock)) {
-    return "Hit";
-  } else {
-    return "Miss";
-  }
-};
+// const PlayerAttack = (playerAttack: string, cpuBlock: string) => {
+//   if (rules[playerAttackChoice].includes(cpuBlock)) {
+//     return "Hit";
+//   } else {
+//     return "Miss";
+//   }
+// };
 
 export const Fight = () => {};
 
 export const FightWindow = () => {
+const ButtonBlock =()=>{
+
+}
+
   return (
-    <>
+    <StylesFW>
       <p>бой</p>
       <div>
         <p>Атака</p>
         <ul>
-          <li>head</li>
-          <li>chest</li>
-          <li>groin</li>
-          <li>legs</li>
+          {attacks.map((a,i)=><li key={i}>{a}</li>
+          )}
         </ul>
+        <button
+          onClick={(e) => {
+            alert("атака");
+          }}
+        >
+          Выбрать атаку
+        </button>
       </div>
       <div>
         <p>Защита</p>
         <ul>
-          <li>"head_legs"</li>
-          <li>"head_chest"</li>
-          <li>"chest_groin"</li>
-          <li>"groin_legs"</li>
+        {blocks.map((b,i)=><li key={i}>{b}</li>
+          )}
         </ul>
+        <Button name={"Выбрать защиту"} callBack={()=>ButtonBlock()}/>
       </div>
       <div>Здоровье</div>
       <div>Здоровье противника</div>
-
-      </>
+    </StylesFW>
   );
 };
+
+const StylesFW = styled.div`
+  grid-area: c;
+  border: 1px solid red;
+`;

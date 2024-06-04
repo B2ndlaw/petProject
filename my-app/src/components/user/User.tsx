@@ -6,20 +6,15 @@ type UserType = {
   isLogin: boolean;
   rase: string;
   class: string;
-  gender: string
+  gender: string;
 };
 
 export const User1 = {
-    nickName: "Lord",
-    rase: "Elf",
-    userClass: "rogue",
-    role: "user",
-    gender: "male"
+  nickName: "Lord",
+  rase: "Elf",
+  userClass: "rogue",
+  role: "user",
+  gender: "male",
+};
 
-} 
-
-const { nickName, rase, userClass, role = "guest"} = User1;
-
-
-
-
+const { nickName, rase, userClass, role = "guest" } = User1;
