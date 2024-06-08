@@ -5,6 +5,7 @@ import { Button } from "./Button";
 import styled from "styled-components";
 import { v1 } from "uuid";
 
+//Data
 export const Messages = () => {
   let [message, setMessage] = useState([
     { message: "message1" },
@@ -13,21 +14,24 @@ export const Messages = () => {
     { message: "message4" },
   ]);
 
-  let [title, setTitle] = useState("");
+  //State new message
+  let [titleNewMessage, setTitleNewMessage] = useState("");
 
-  const addMassage = (title: string) => {
-    let newMessage = { message: title };
+
+  //Function add message
+  const addMassage = (titleNewMessage: string) => {
+    let newMessage = { message: titleNewMessage };
     setMessage([newMessage, ...message]);
   };
 
   const onClickHandlerAddMessage = () => {
-    addMassage(title);
-    setTitle("");
+    addMassage(titleNewMessage);
+    setTitleNewMessage("");
   };
 
   return (
     <StylesMessages>
-      <Input title={title} setTitle={setTitle} />
+      <Input titleNewMessage={titleNewMessage} setTitleNewMessage={setTitleNewMessage} />
       <Button name="+" callBack={onClickHandlerAddMessage} />
 
       {/* <FullInput addMassage={addMassage}/>*/}
@@ -40,5 +44,9 @@ export const Messages = () => {
 };
 
 const StylesMessages = styled.div`
-  display: flex;
+  display: inline-block;
+  background-color: #b8b8e4;
 `;
+
+
+

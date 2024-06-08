@@ -1,42 +1,27 @@
 import styled from "styled-components";
 
-// type MenuType = {
-//     title: string
-//     href: string
-// }
+const menuItems = [
+  {name: "Главная", href: "/main"},
+  {name: "Персонаж", href: "/hero"},
+  {name: "Бой", href: "/fight"},
+  {name: "Сообщения", href: "/messages"},
+  {name: "Таверна", href: "/tavern"},
+  {name: "Выход", href: "/exit"},
+]
 
-// {props.tasks.map((t) => {
-//   const onRemoveHandler = () => props.removeTask(t.id);
-//   return (
-//     <li key={t.id}>
-//       <input type="checkbox" checked={t.isDone} />
-//       <span>{t.title}</span>
-//       <button onClick={onRemoveHandler}>x</button>
-//     </li>
-//   );
-// })}
+type MenuType = {
+  title: string,
+  href: string
+}
 
-
-// type MenuItemType = {
-//   title: string,
-//   href: string
-// }
-
-// const menuItems = ["Домой", "Аренда", "Сообщения", "Персонаж", "Настройки", "Выход"];
-
-// const menuItemsList = menuItems.map((m: MenuItemType)=>{<li key={}>{m}</li>})
-
-//const menuItems = [{title:"Домой"}, {title:"Домой"}, {title:"Домой"}, {title:"Домой"}, {title:"Домой"}, {title:"Домой"}];
-// const menuItemsList = menuItem.map((m)=>{<li key={}>{m.title}</li>})
-
-export const Menu = () => {
+export const Menu = (props: MenuType) => {
   return (
     <StylesMenu>
       <p>Меню</p>
       <ul>
-     <li>1</li>
-     <li>2</li>
-     <li>3</li>
+        {menuItems.map((m)=>{return <li><a href={m.href}> {m.name}</a> </li>})}
+  
+   
       </ul>
     </StylesMenu>
   );
@@ -44,5 +29,5 @@ export const Menu = () => {
 
 const StylesMenu = styled.nav`
   grid-area: n;
-  border: 1px solid green;
+  border: 1px dashed green;
 `;

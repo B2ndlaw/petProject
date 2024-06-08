@@ -10,5 +10,5 @@ export const TextArea = () => {
 
 const StylesTextArea = styled.div`
   grid-area: t;
-  border: 1px solid blue;
+  border: 1px dashed blue;
 `;

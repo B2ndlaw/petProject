@@ -18,3 +18,6 @@ export const User1 = {
 };
 
 const { nickName, rase, userClass, role = "guest" } = User1;
+
+
+//суммировать статы через reduce

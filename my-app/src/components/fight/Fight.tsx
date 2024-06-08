@@ -1,41 +1,39 @@
-//Rules Attack
-//   head: {
-//     head_legs: "miss",
-//     head_chest: "miss",
-//     chest_groin: "hit",
-//     groin_legs: "hit",
-//   },
-//   chest: {
-//     head_legs: "hit",
-//     head_chest: "miss",
-//     chest_groin: "miss",
-//     groin_legs: "hit",
-//   },
-//   groin: {
-//     head_legs: "hit",
-//     head_chest: "hit",
-//     chest_groin: "miss",
-//     groin_legs: "miss",
-//   },
-//   legs: {
-//     head_legs: "miss",
-//     head_chest: "hit",
-//     chest_groin: "hit",
-//     groin_legs: "miss",
-//   },
-
 import styled from "styled-components";
 import { Button } from "../Button";
 import { useState } from "react";
 
-//Data warriors
+//Fight
 
+
+
+
+
+
+
+export function Counter() {
+  let [data, setData] = useState(40);
+
+  const setDataFunction = () => {
+    if (data > 0) {
+      setData(data - 5);
+    } else {
+      alert("the end");
+    }
+  };
+  return (
+    <>
+      <div>{data}</div>
+      <button onClick={setDataFunction}>+</button>
+    </>
+  );
+}
 
 
 
 //Lists attack & block
 const attacks = ["head", "chest", "groin", "legs"];
 const blocks = ["head_legs", "head_chest", "chest_groin", "groin_legs"];
+
 
 
 
@@ -53,18 +51,8 @@ const rules = {
   legs: ["head_chest", "chest_groin"],
 };
 
-// const computerAttack = (cpuAttack: string, playerBlock: string) => {
-//   if (rules[cpuAttack].includes(playerBlock)) {
-//     return "Hit";
-//   } else {
-//     return "Miss";
-//   }
-// };
-
 //PlayerAttack
-const playerAttackChoice = () => {
-
-}
+const playerAttackChoice = () => {};
 
 const computerBlockRandomChoice = () => {
   return blocks[Math.floor(Math.random() * blocks.length)];
@@ -78,12 +66,20 @@ const computerBlockRandomChoice = () => {
 //   }
 // };
 
-export const Fight = () => {};
+
 
 export const FightWindow = () => {
-const ButtonBlock =()=>{
+let [xpPlayer, setXpPlayer] = useState(40);
+let [xpCpu,setXpCpu] = useState(40);
+  const ButtonBlock = () => {};
 
-}
+
+  const Fight = () => {
+    let [attackPlayer, setAttackPlayer] = useState("");
+  
+    
+  }
+  
 
   return (
     <StylesFW>
@@ -91,8 +87,9 @@ const ButtonBlock =()=>{
       <div>
         <p>Атака</p>
         <ul>
-          {attacks.map((a,i)=><li key={i}>{a}</li>
-          )}
+          {attacks.map((a, i) => (
+            <li key={i}><input type="radio" name="radioAttack"/>{a}</li>
+          ))}
         </ul>
         <button
           onClick={(e) => {
@@ -105,18 +102,35 @@ const ButtonBlock =()=>{
       <div>
         <p>Защита</p>
         <ul>
-        {blocks.map((b,i)=><li key={i}>{b}</li>
-          )}
+          {blocks.map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
         </ul>
-        <Button name={"Выбрать защиту"} callBack={()=>ButtonBlock()}/>
+        <Button name={"Выбрать защиту"} callBack={() => ButtonBlock()} />
       </div>
-      <div>Здоровье</div>
-      <div>Здоровье противника</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Здоровье игрока</th>
+            <th>Здоровье соперника</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+       
+          <td>40</td>
+          <td>40</td>
+        </tbody>
+      </table>
+      <div>
+        <button onClick={() => {}}>удар игрока</button>
+        <button>удар противника</button>
+      </div>
+      <Counter />
     </StylesFW>
   );
 };
 
 const StylesFW = styled.div`
-  grid-area: c;
-  border: 1px solid red;
+  border: 1px dashed red;
 `;
