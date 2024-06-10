@@ -1,14 +1,7 @@
 import styled from "styled-components";
 import { Button } from "../Button";
-import { useState } from "react";
-
-//Fight
-
-
-
-
-
-
+import { ChangeEvent, useState } from "react";
+import { v1 } from "uuid";
 
 export function Counter() {
   let [data, setData] = useState(40);
@@ -28,58 +21,59 @@ export function Counter() {
   );
 }
 
-
-
 //Lists attack & block
-const attacks = ["head", "chest", "groin", "legs"];
-const blocks = ["head_legs", "head_chest", "chest_groin", "groin_legs"];
-
-
-
-
-//CPU Attack
-const computerAttackRandomChoice = () => {
-  let computerAttackChoice =
-    attacks[Math.floor(Math.random() * attacks.length)];
-  return computerAttackChoice;
-};
+const attacks = [
+  { part: "head", id: v1() },
+  { part: "chest", id: v1() },
+  { part: "groin", id: v1() },
+  { part: "legs", id: v1() },
+];
+const blocks = [
+  { part: "head_legs", id: v1() },
+  { part: "head_chest", id: v1() },
+  { part: "chest_groin", id: v1() },
+  { part: "groin_legs", id: v1() },
+];
+enum RulesKeys {
+  HEAD = "head",
+  CHEST = "chest",
+  GROIN = "groin",
+  LEGS = "legs",
+}
 
 const rules = {
-  head: ["chest_groin", "groin_legs"],
-  chest: ["head_legs", "groin_legs"],
-  groin: ["head_legs", "head_chest"],
-  legs: ["head_chest", "chest_groin"],
+  [RulesKeys.HEAD]: ["chest_groin", "groin_legs"],
+  [RulesKeys.CHEST]: ["head_legs", "groin_legs"],
+  [RulesKeys.GROIN]: ["head_legs", "head_chest"],
+  [RulesKeys.LEGS]: ["head_chest", "chest_groin"],
 };
 
-//PlayerAttack
-const playerAttackChoice = () => {};
-
-const computerBlockRandomChoice = () => {
-  return blocks[Math.floor(Math.random() * blocks.length)];
+//CPU move
+const computerAttackFunction = () => {
+  let computerAttack = attacks[Math.floor(Math.random() * attacks.length)].part;
 };
-
-// const PlayerAttack = (playerAttack: string, cpuBlock: string) => {
-//   if (rules[playerAttackChoice].includes(cpuBlock)) {
-//     return "Hit";
-//   } else {
-//     return "Miss";
-//   }
-// };
-
-
 
 export const FightWindow = () => {
-let [xpPlayer, setXpPlayer] = useState(40);
-let [xpCpu,setXpCpu] = useState(40);
+  let [xpPlayer, setXpPlayer] = useState(40);
+  let [xpCpu, setXpCpu] = useState(40);
   const ButtonBlock = () => {};
 
+  const Fight = () => {};
 
-  const Fight = () => {
-    let [attackPlayer, setAttackPlayer] = useState("");
-  
-    
-  }
-  
+  let [playerAttack, setPlayerAttack] = useState<RulesKeys>(RulesKeys.CHEST);
+
+  const playerAttackFunction = () => {
+    let computerBlock = blocks[Math.floor(Math.random() * blocks.length)].part;
+    if (rules[playerAttack]?.includes(computerBlock)) {
+      console.log("Hit");
+      console.log(playerAttack);
+      console.log(computerBlock);
+    } else {
+      console.log("Miss");
+      console.log(playerAttack);
+      console.log(computerBlock);
+    }
+  };
 
   return (
     <StylesFW>
@@ -87,46 +81,61 @@ let [xpCpu,setXpCpu] = useState(40);
       <div>
         <p>Атака</p>
         <ul>
-          {attacks.map((a, i) => (
-            <li key={i}><input type="radio" name="radioAttack"/>{a}</li>
-          ))}
+          {attacks.map((a) => {
+            const onChangeAttackHandler = (
+              e: ChangeEvent<HTMLInputElement>
+            ) => {
+              setPlayerAttack(e.currentTarget.value as RulesKeys);
+            };
+            return (
+              <li key={a.id}>
+                <input
+                  onChange={onChangeAttackHandler}
+                  type="radio"
+                  name="radioAttack"
+                  value={a.part}
+                />
+                {a.part}
+              </li>
+            );
+          })}
         </ul>
         <button
-          onClick={(e) => {
-            alert("атака");
+          onClick={() => {
+            playerAttackFunction();
           }}
         >
-          Выбрать атаку
+          Атаковать
         </button>
       </div>
-      <div>
+      {/* <div>
         <p>Защита</p>
         <ul>
           {blocks.map((b, i) => (
-            <li key={i}>{b}</li>
+            <li key={i}>
+              <input type="radio" name="radioBlock" />
+              {b.part}
+            </li>
           ))}
         </ul>
         <Button name={"Выбрать защиту"} callBack={() => ButtonBlock()} />
-      </div>
+      </div> */}
+
+      {/* <Counter /> */}
       <table>
         <thead>
           <tr>
             <th>Здоровье игрока</th>
             <th>Здоровье соперника</th>
           </tr>
-          
         </thead>
         <tbody>
-       
-          <td>40</td>
-          <td>40</td>
+          <tr>
+            <td>40</td>
+            <td>40</td>
+          </tr>
         </tbody>
       </table>
-      <div>
-        <button onClick={() => {}}>удар игрока</button>
-        <button>удар противника</button>
-      </div>
-      <Counter />
     </StylesFW>
   );
 };

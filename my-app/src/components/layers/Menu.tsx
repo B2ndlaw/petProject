@@ -1,27 +1,32 @@
 import styled from "styled-components";
+import { v1 } from "uuid";
 
 const menuItems = [
-  {name: "Главная", href: "/main"},
-  {name: "Персонаж", href: "/hero"},
-  {name: "Бой", href: "/fight"},
-  {name: "Сообщения", href: "/messages"},
-  {name: "Таверна", href: "/tavern"},
-  {name: "Выход", href: "/exit"},
-]
+  { name: "Главная", href: "/main", id: v1() },
+  { name: "Персонаж", href: "/hero", id: v1() },
+  { name: "Бой", href: "/fight", id: v1() },
+  { name: "Сообщения", href: "/messages", id: v1() },
+  { name: "Таверна", href: "/tavern", id: v1() },
+  { name: "Выход", href: "/exit", id: v1() },
+];
 
 type MenuType = {
-  title: string,
-  href: string
-}
+  title: string;
+  href: string;
+};
 
 export const Menu = (props: MenuType) => {
   return (
     <StylesMenu>
       <p>Меню</p>
       <ul>
-        {menuItems.map((m)=>{return <li><a href={m.href}> {m.name}</a> </li>})}
-  
-   
+        {menuItems.map((m) => {
+          return (
+            <li key={m.id}>
+              <a href={m.href}> {m.name}</a>{" "}
+            </li>
+          );
+        })}
       </ul>
     </StylesMenu>
   );
