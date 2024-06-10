@@ -17,6 +17,7 @@ export function Counter() {
     <>
       <div>{data}</div>
       <button onClick={setDataFunction}>+</button>
+      <Button name={"+"} callBack={setDataFunction}/>
     </>
   );
 }
@@ -50,35 +51,52 @@ const rules = {
 
 //CPU move
 const computerAttackFunction = () => {
-  let computerAttack = attacks[Math.floor(Math.random() * attacks.length)].part;
+  
 };
 
 export const FightWindow = () => {
-  let [xpPlayer, setXpPlayer] = useState(40);
-  let [xpCpu, setXpCpu] = useState(40);
+  // let [playerXp, setPlayerXp] = useState(40);
+  let [computerXp, setComputerXp] = useState(40);
   const ButtonBlock = () => {};
 
   const Fight = () => {};
 
   let [playerAttack, setPlayerAttack] = useState<RulesKeys>(RulesKeys.CHEST);
+  // let [playerBlock, setPlayerBlock] = useState<RulesKeys>(RulesKeys.CHEST);
 
-  const playerAttackFunction = () => {
+  const attackFunction =()=> {
     let computerBlock = blocks[Math.floor(Math.random() * blocks.length)].part;
+    // let computerAttack = attacks[Math.floor(Math.random() * attacks.length)].part;
     if (rules[playerAttack]?.includes(computerBlock)) {
       console.log("Hit");
       console.log(playerAttack);
       console.log(computerBlock);
-      console.log(xpCpu);
-      return setXpCpu(xpCpu-=5);
+      console.log(computerXp);
+      return setComputerXp(computerXp-=5);
      
     } else {
       console.log("Miss");
       console.log(playerAttack);
       console.log(computerBlock);
-      console.log(xpCpu);
-      return xpCpu;
-  
+      console.log(computerXp);
+      return computerXp;
     }
+
+    //   if (rules[computerAttack]?.includes(playerBlock)) {
+    //     console.log("Hit");
+    //     console.log(computerAttack);
+    //     console.log(playerBlock);
+    //     console.log(playerXp);
+    //     return setPlayerXp(playerXp-=5);
+       
+    //   } else {
+    //     console.log("Miss");
+    //     console.log(computerAttack);
+    //     console.log(playerBlock);
+    //     console.log(playerXp);
+    //     return playerXp;
+  
+    // }
   };
 
   return (
@@ -106,13 +124,7 @@ export const FightWindow = () => {
             );
           })}
         </ul>
-        <button
-          onClick={() => {
-            playerAttackFunction();
-          }}
-        >
-          Атаковать
-        </button>
+        <Button name={"Атаковать"} callBack={attackFunction} />
       </div>
       {/* <div>
         <p>Защита</p>
@@ -143,6 +155,7 @@ export const FightWindow = () => {
         </tbody>
       </table>
     </StylesFW>
+   
   );
 };
 
