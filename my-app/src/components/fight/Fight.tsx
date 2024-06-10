@@ -68,10 +68,16 @@ export const FightWindow = () => {
       console.log("Hit");
       console.log(playerAttack);
       console.log(computerBlock);
+      console.log(xpCpu);
+      return setXpCpu(xpCpu-=5);
+     
     } else {
       console.log("Miss");
       console.log(playerAttack);
       console.log(computerBlock);
+      console.log(xpCpu);
+      return xpCpu;
+  
     }
   };
 
