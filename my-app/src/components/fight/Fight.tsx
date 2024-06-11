@@ -17,7 +17,7 @@ export function Counter() {
     <>
       <div>{data}</div>
       <button onClick={setDataFunction}>+</button>
-      <Button name={"+"} callBack={setDataFunction}/>
+      <Button name={"+"} callBack={setDataFunction} />
     </>
   );
 }
@@ -50,13 +50,13 @@ const rules = {
 };
 
 //CPU move
-const computerAttackFunction = () => {
-  
-};
+const computerAttackFunction = () => {};
 
 export const FightWindow = () => {
-  // let [playerXp, setPlayerXp] = useState(40);
+  let [playerXp, setPlayerXp] = useState(40);
   let [computerXp, setComputerXp] = useState(40);
+  let [buttonState, setButtonState] = useState(false);
+  let [checkedState, setCheckedState] = useState(false);
   const ButtonBlock = () => {};
 
   const Fight = () => {};
@@ -64,16 +64,18 @@ export const FightWindow = () => {
   let [playerAttack, setPlayerAttack] = useState<RulesKeys>(RulesKeys.CHEST);
   // let [playerBlock, setPlayerBlock] = useState<RulesKeys>(RulesKeys.CHEST);
 
-  const attackFunction =()=> {
+  const attackFunction = () => {
     let computerBlock = blocks[Math.floor(Math.random() * blocks.length)].part;
     // let computerAttack = attacks[Math.floor(Math.random() * attacks.length)].part;
+    setButtonState(false);
+    setCheckedState(false);
+
     if (rules[playerAttack]?.includes(computerBlock)) {
       console.log("Hit");
       console.log(playerAttack);
       console.log(computerBlock);
       console.log(computerXp);
-      return setComputerXp(computerXp-=5);
-     
+      return setComputerXp((computerXp -= 5));
     } else {
       console.log("Miss");
       console.log(playerAttack);
@@ -88,14 +90,14 @@ export const FightWindow = () => {
     //     console.log(playerBlock);
     //     console.log(playerXp);
     //     return setPlayerXp(playerXp-=5);
-       
+
     //   } else {
     //     console.log("Miss");
     //     console.log(computerAttack);
     //     console.log(playerBlock);
     //     console.log(playerXp);
     //     return playerXp;
-  
+
     // }
   };
 
@@ -103,13 +105,17 @@ export const FightWindow = () => {
     <StylesFW>
       <p>бой</p>
       <div>
-        <p>Атака</p>
+        <fieldset>
+          <legend>Атака</legend>
         <ul>
           {attacks.map((a) => {
             const onChangeAttackHandler = (
               e: ChangeEvent<HTMLInputElement>
             ) => {
               setPlayerAttack(e.currentTarget.value as RulesKeys);
+              setButtonState(true);
+              setCheckedState(e.currentTarget.checked)
+             
             };
             return (
               <li key={a.id}>
@@ -118,14 +124,26 @@ export const FightWindow = () => {
                   type="radio"
                   name="radioAttack"
                   value={a.part}
+                  id={a.id}
+                  checked={checkedState}
                 />
-                {a.part}
+                <label htmlFor={a.id}>{a.part}</label>
               </li>
             );
           })}
         </ul>
-        <Button name={"Атаковать"} callBack={attackFunction} />
+       
+           </fieldset>
+           <Button
+          name={"Атаковать"}
+          callBack={attackFunction}
+          disabled={!buttonState}
+          
+        />
       </div>
+     
+        
+ 
       {/* <div>
         <p>Защита</p>
         <ul>
@@ -149,13 +167,12 @@ export const FightWindow = () => {
         </thead>
         <tbody>
           <tr>
-            <td>40</td>
-            <td>40</td>
+            <td>{playerXp}</td>
+            <td>{computerXp}</td>
           </tr>
         </tbody>
       </table>
     </StylesFW>
-   
   );
 };
 

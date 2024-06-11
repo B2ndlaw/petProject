@@ -3,10 +3,10 @@ import { v1 } from "uuid";
 
 const menuItems = [
   { name: "Главная", href: "/main", id: v1() },
-  { name: "Персонаж", href: "/hero", id: v1() },
-  { name: "Бой", href: "/fight", id: v1() },
+  { name: "Самурай", href: "/hero", id: v1() },
+  { name: "Додзё", href: "/fight", id: v1() },
   { name: "Сообщения", href: "/messages", id: v1() },
-  { name: "Таверна", href: "/tavern", id: v1() },
+  { name: "Идзакая", href: "/tavern", id: v1() },
   { name: "Выход", href: "/exit", id: v1() },
 ];
 
