@@ -3,25 +3,6 @@ import { Button } from "../Button";
 import { ChangeEvent, useState } from "react";
 import { v1 } from "uuid";
 
-export function Counter() {
-  let [data, setData] = useState(40);
-
-  const setDataFunction = () => {
-    if (data > 0) {
-      setData(data - 5);
-    } else {
-      alert("the end");
-    }
-  };
-  return (
-    <>
-      <div>{data}</div>
-      <button onClick={setDataFunction}>+</button>
-      <Button name={"+"} callBack={setDataFunction} />
-    </>
-  );
-}
-
 //Lists attack & block
 const attacks = [
   { part: "head", id: v1() },
@@ -35,42 +16,60 @@ const blocks = [
   { part: "chest_groin", id: v1() },
   { part: "groin_legs", id: v1() },
 ];
-enum RulesKeys {
+enum RulesAttackKeys {
   HEAD = "head",
   CHEST = "chest",
   GROIN = "groin",
   LEGS = "legs",
 }
 
-const rules = {
-  [RulesKeys.HEAD]: ["chest_groin", "groin_legs"],
-  [RulesKeys.CHEST]: ["head_legs", "groin_legs"],
-  [RulesKeys.GROIN]: ["head_legs", "head_chest"],
-  [RulesKeys.LEGS]: ["head_chest", "chest_groin"],
+const rulesAttack = {
+  [RulesAttackKeys.HEAD]: ["chest_groin", "groin_legs"],
+  [RulesAttackKeys.CHEST]: ["head_legs", "groin_legs"],
+  [RulesAttackKeys.GROIN]: ["head_legs", "head_chest"],
+  [RulesAttackKeys.LEGS]: ["head_chest", "chest_groin"],
 };
 
-//CPU move
-const computerAttackFunction = () => {};
+enum RulesBlockKeys {
+  HEAD_LEGS = "head_legs",
+  HEAD_CHEST = "head_chest",
+  CHEST_GROIN = "chest_groin",
+  GROIN_LEGS = "groin_legs",
+}
+
+const rulesBlock = {
+  [RulesBlockKeys.HEAD_LEGS]: ["chest", "groin"],
+  [RulesBlockKeys.HEAD_CHEST]: ["groin", "legs"],
+  [RulesBlockKeys.CHEST_GROIN]: ["head", "legs"],
+  [RulesBlockKeys.GROIN_LEGS]: ["head", "chest"],
+};
 
 export const FightWindow = () => {
   let [playerXp, setPlayerXp] = useState(40);
   let [computerXp, setComputerXp] = useState(40);
-  let [buttonState, setButtonState] = useState(false);
-  let [checkedState, setCheckedState] = useState(false);
-  const ButtonBlock = () => {};
+  // let [buttonAttackState, setButtonAttackState] = useState(false);
+  // let [buttonBlockState, setButtonBlockState] = useState(false);
+  let [buttonFightState, setButtonFightState] = useState(false);
+  let [checkedAttackState, setCheckedAttackState] = useState(false);
+  let [checkedBlockState, setCheckedBlockState] = useState(false);
+  let [playerAttack, setPlayerAttack] = useState<RulesAttackKeys>(
+    RulesAttackKeys.CHEST
+  );
+  let [playerBlock, setPlayerBlock] = useState<RulesBlockKeys>(
+    RulesBlockKeys.CHEST_GROIN
+  );
 
-  const Fight = () => {};
-
-  let [playerAttack, setPlayerAttack] = useState<RulesKeys>(RulesKeys.CHEST);
-  // let [playerBlock, setPlayerBlock] = useState<RulesKeys>(RulesKeys.CHEST);
+  const fightFunction = () => {
+    attackFunction();
+    blockFunction();
+  };
 
   const attackFunction = () => {
     let computerBlock = blocks[Math.floor(Math.random() * blocks.length)].part;
-    // let computerAttack = attacks[Math.floor(Math.random() * attacks.length)].part;
-    setButtonState(false);
-    setCheckedState(false);
+    setButtonFightState(false);
+    setCheckedAttackState(false);
 
-    if (rules[playerAttack]?.includes(computerBlock)) {
+    if (rulesAttack[playerAttack]?.includes(computerBlock)) {
       console.log("Hit");
       console.log(playerAttack);
       console.log(computerBlock);
@@ -83,22 +82,27 @@ export const FightWindow = () => {
       console.log(computerXp);
       return computerXp;
     }
+  };
 
-    //   if (rules[computerAttack]?.includes(playerBlock)) {
-    //     console.log("Hit");
-    //     console.log(computerAttack);
-    //     console.log(playerBlock);
-    //     console.log(playerXp);
-    //     return setPlayerXp(playerXp-=5);
+  const blockFunction = () => {
+    let computerAttack =
+      attacks[Math.floor(Math.random() * attacks.length)].part;
+    setButtonFightState(false);
+    setCheckedBlockState(false);
 
-    //   } else {
-    //     console.log("Miss");
-    //     console.log(computerAttack);
-    //     console.log(playerBlock);
-    //     console.log(playerXp);
-    //     return playerXp;
-
-    // }
+    if (rulesBlock[playerBlock]?.includes(computerAttack)) {
+      console.log("Hit");
+      console.log(computerAttack);
+      console.log(playerBlock);
+      console.log(playerXp);
+      return setPlayerXp((playerXp -= 5));
+    } else {
+      console.log("Miss");
+      console.log(computerAttack);
+      console.log(playerBlock);
+      console.log(playerXp);
+      return playerXp;
+    }
   };
 
   return (
@@ -107,57 +111,79 @@ export const FightWindow = () => {
       <div>
         <fieldset>
           <legend>Атака</legend>
-        <ul>
-          {attacks.map((a) => {
-            const onChangeAttackHandler = (
-              e: ChangeEvent<HTMLInputElement>
-            ) => {
-              setPlayerAttack(e.currentTarget.value as RulesKeys);
-              setButtonState(true);
-              setCheckedState(e.currentTarget.checked)
-             
-            };
-            return (
-              <li key={a.id}>
-                <input
-                  onChange={onChangeAttackHandler}
-                  type="radio"
-                  name="radioAttack"
-                  value={a.part}
-                  id={a.id}
-                  checked={checkedState}
-                />
-                <label htmlFor={a.id}>{a.part}</label>
-              </li>
-            );
-          })}
-        </ul>
-       
-           </fieldset>
-           <Button
-          name={"Атаковать"}
+          <ul>
+            {attacks.map((a) => {
+              const onChangeAttackHandler = (
+                e: ChangeEvent<HTMLInputElement>
+              ) => {
+                setPlayerAttack(e.currentTarget.value as RulesAttackKeys);
+                // setButtonFightState(true);
+                setCheckedAttackState(e.currentTarget.checked);
+              };
+              return (
+                <li key={a.id}>
+                  <input
+                    onChange={onChangeAttackHandler}
+                    type="radio"
+                    name="radioAttack"
+                    value={a.part}
+                    id={a.id}
+                    checked={checkedAttackState}
+                  />
+                  <label htmlFor={a.id}>{a.part}</label>
+                </li>
+              );
+            })}
+          </ul>
+        </fieldset>
+        {/* <Button
+          name={"Выбрать атаку"}
           callBack={attackFunction}
-          disabled={!buttonState}
+          disabled={!buttonAttackState}
           
-        />
+        /> */}
       </div>
-     
-        
- 
-      {/* <div>
-        <p>Защита</p>
-        <ul>
-          {blocks.map((b, i) => (
-            <li key={i}>
-              <input type="radio" name="radioBlock" />
-              {b.part}
-            </li>
-          ))}
-        </ul>
-        <Button name={"Выбрать защиту"} callBack={() => ButtonBlock()} />
-      </div> */}
 
-      {/* <Counter /> */}
+      <div>
+        <fieldset>
+          <legend>Защита</legend>
+          <ul>
+            {blocks.map((b) => {
+              const onChangeBlockHandler = (
+                e: ChangeEvent<HTMLInputElement>
+              ) => {
+                setPlayerBlock(e.currentTarget.value as RulesBlockKeys);
+                setButtonFightState(true);
+                setCheckedBlockState(e.currentTarget.checked);
+              };
+              return (
+                <li key={b.id}>
+                  <input
+                    onChange={onChangeBlockHandler}
+                    type="radio"
+                    name="radioBlock"
+                    value={b.part}
+                    id={b.id}
+                    checked={checkedBlockState}
+                  />
+                  <label htmlFor={b.id}>{b.part}</label>
+                </li>
+              );
+            })}
+          </ul>
+        </fieldset>
+        {/* <Button
+          name={"Выбрать защиту"}
+          callBack={blockFunction}
+          disabled={!buttonBlockState}
+          
+        /> */}
+      </div>
+      <Button
+        name="В БОЙ"
+        callBack={fightFunction}
+        disabled={!buttonFightState}
+      />
       <table>
         <thead>
           <tr>
