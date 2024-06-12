@@ -105,6 +105,9 @@ export const FightWindow = () => {
     }
   };
 
+  let [numberButtonUnlock, setNumberButtonUnlock] = useState(0);
+
+
   return (
     <StylesFW>
       <p>бой</p>
@@ -117,8 +120,9 @@ export const FightWindow = () => {
                 e: ChangeEvent<HTMLInputElement>
               ) => {
                 setPlayerAttack(e.currentTarget.value as RulesAttackKeys);
-                // setButtonFightState(true);
                 setCheckedAttackState(e.currentTarget.checked);
+                setNumberButtonUnlock(numberButtonUnlock+=1);
+                setButtonFightState(numberButtonUnlock===2);
               };
               return (
                 <li key={a.id}>
@@ -153,8 +157,10 @@ export const FightWindow = () => {
                 e: ChangeEvent<HTMLInputElement>
               ) => {
                 setPlayerBlock(e.currentTarget.value as RulesBlockKeys);
-                setButtonFightState(true);
+                setNumberButtonUnlock(numberButtonUnlock+=1);
+                setButtonFightState(numberButtonUnlock===2);
                 setCheckedBlockState(e.currentTarget.checked);
+                
               };
               return (
                 <li key={b.id}>
