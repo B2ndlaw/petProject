@@ -1,23 +1,28 @@
 type UserType = {
-  nickName: string;
+  //Authorization
   email: string;
   login: string;
   password: string;
+  role: string;
+  //Game data
+  nickName: string;
   isLogin: boolean;
-  rase: string;
-  class: string;
+  class: "samurai" | "ronin" | "ony";
   gender: string;
+  level: number;
+  experience: number;
+  coin: number
 };
 
-export const User1 = {
-  nickName: "Lord",
-  rase: "Elf",
-  userClass: "rogue",
-  role: "user",
-  gender: "male",
-};
+  
 
-const { nickName, rase, userClass, role = "guest" } = User1;
+export const User = (props: UserType) => {
+return(
+<div></div>
+)
 
 
-//суммировать статы через reduce
+}
+
+
+

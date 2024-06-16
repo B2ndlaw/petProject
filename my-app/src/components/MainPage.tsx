@@ -1,9 +1,9 @@
 import styled from "styled-components";
 // import { Content } from "./layers/Content";
-import { Menu } from "./layers/Menu";
-import { TextArea } from "./layers/Text";
-import { FightWindow } from "./fight/Fight";
-import { Messages } from "./Messages";
+import { Menu } from "./Menu";
+import { TextArea } from "./Text";
+import { FightWindow } from "./layers/Fight";
+import { Messages } from "./layers/Messages";
 import { Content } from "./layers/Content";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
