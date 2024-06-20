@@ -6,6 +6,7 @@ import { Adventure} from "./layers/Adventure";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserPage } from "./user/UserPage";
 import { StartPage } from "./StartPage";
+import { Tavern } from "./layers/Tavern";
 
 
 export const MainPage = () => {
@@ -19,9 +20,10 @@ export const MainPage = () => {
               {" "}
               <Route path="/hero" element={<UserPage />} />
               <Route path="/adventure" element={<Adventure />} />
-              <Route path="/fight" element={<Arena />} />
+              <Route path="/arena" element={<Arena />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/startPage" element={<StartPage />} />
+              <Route path="/tavern" element={<Tavern />} />
             </Routes>
           </div>
       
