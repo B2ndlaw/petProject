@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Menu } from "./Menu";
-import { FightWindow } from "./layers/Fight";
+import { Arena } from "./layers/Arena";
 import { Messages } from "./layers/Messages";
-import { Content } from "./layers/Content";
+import { Adventure} from "./layers/Adventure";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserPage } from "./user/UserPage";
 import { StartPage } from "./StartPage";
+
 
 export const MainPage = () => {
   return (
@@ -13,18 +14,21 @@ export const MainPage = () => {
       <BrowserRouter>
         <MainPageWrapper>
           <div>
-            
             {" "}
             <Routes>
               {" "}
               <Route path="/hero" element={<UserPage />} />
-              <Route path="/main" element={<Content />} />
-              <Route path="/fight" element={<FightWindow />} />
+              <Route path="/adventure" element={<Adventure />} />
+              <Route path="/fight" element={<Arena />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/startPage" element={<StartPage />} />
             </Routes>
           </div>
-          <Menu title={""} href={""} />
+      
+          <Menu href={""} />
+        
+
+         
           
         </MainPageWrapper>
       </BrowserRouter>
@@ -40,3 +44,5 @@ const MainPageWrapper = styled.div`
   display: flex;
   border: 2px solid black;
 `;
+
+
