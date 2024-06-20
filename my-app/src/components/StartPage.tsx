@@ -1,8 +1,6 @@
 
 
-type StartPageTypeProps = {
-  text: string;
-};
+
 
 const StartPageDescription = () => {
   const text = [
@@ -18,14 +16,14 @@ const StartPageDescription = () => {
   );
 };
 
-export const StartPage = (props: StartPageTypeProps) => {
+export const StartPage = () => {
   return (
     <div>
       <div>
         <img alt="bg1" />
         <img alt="bg2" />
       </div>
-      <span>{props.text}</span>
+  
       <StartPageDescription />
       <p>
         На массивной входной двери из досок ты видишь табличку с надписью
