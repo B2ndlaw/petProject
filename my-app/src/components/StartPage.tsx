@@ -20,8 +20,8 @@ export const StartPage = () => {
   return (
     <div>
       <div>
-        <img alt="bg1" />
-        <img alt="bg2" />
+        <img src="https://wp-s.ru/wallpapers/2/10/531339893849606/nochnaya-yaponiya-polna-lyudmi-i-ognyami.jpg" width={"500px"} alt="bg1" />
+   
       </div>
   
       <StartPageDescription />
@@ -33,6 +33,10 @@ export const StartPage = () => {
       <button>
         Поискать другой вход
       </button>
+
+      <p>задания - в таверне</p>
+      <p>бои - на арене</p>
+      <p>вещи - в кузнице</p>
     </div>
   );
 };

@@ -1,3 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: center;
+    text-align: center;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+   
+}
 
+.blackTheme{ 
+    background-color: #1d2028;
+    color: white;
+
+
+}
+
+.whiteTheme{background-color: rgb(255, 255, 255)}
 
 

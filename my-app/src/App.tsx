@@ -1,16 +1,22 @@
 import React from "react";
-// import { StartPage } from "./components/StartPage";
 import { MainPage } from "./components/MainPage";
-import { Header } from "./components/layers/Header";
 
+import "./App.css";
+import { StartPage } from "./components/StartPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 export const App = () => {
+  let date = new Date();
+  let hours = date.getHours();
+
   return (
-    <>
-      <Header />
-      {/* <StartPage text="Добро пожаловать, дорогой друг!" /> */}
+    <section className="blackTheme"
+    // className={hours < 8 || hours > 21 ? "blackTheme" : "whiteTheme"}
+    >
+  
+
+      {/* <StartPage /> */}
       <MainPage />
-     
-    </>
+    </section>
   );
 };
