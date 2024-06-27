@@ -1,9 +1,10 @@
 import React from "react";
-import { MainPage } from "./components/MainPage";
+import { MainPage } from "./layout/MainPage";
 
 import "./App.css";
-import { StartPage } from "./components/StartPage";
+import { StartPage } from "./layout/StartPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 
 export const App = () => {
   let date = new Date();
