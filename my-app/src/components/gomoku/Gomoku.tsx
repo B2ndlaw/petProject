@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Menu } from "../Menu";
+import { Menu } from "../menu/Menu";
 import { v1 } from "uuid";
 
 const menuItems = [

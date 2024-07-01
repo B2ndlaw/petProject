@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { v1 } from "uuid";
-import { Menu } from "../../components/Menu";
+import { Menu } from "../../components/menu/Menu";
 import styled from "styled-components";
 
 const menuItems = [

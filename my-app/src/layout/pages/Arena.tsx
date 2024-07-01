@@ -1,8 +1,8 @@
 //Imports & library
 
 import styled from "styled-components";
-import { Fight } from "../../components/Fight";
-import { Menu } from "../../components/Menu";
+import { Fight } from "../../components/fight/Fight";
+import { Menu } from "../../components/menu/Menu";
 import { v1 } from "uuid";
 
 const menuItems = [
@@ -27,4 +27,6 @@ export function Arena() {
 const StylesArena = styled.section`
 background-color: #734343;
 width: 100%;
+height: 100%;
+position: relative;
 `;

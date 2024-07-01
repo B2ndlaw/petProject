@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 import { Arena } from "./pages/Arena";
-import { Messages } from "../components/Messages";
+import { Messages } from "./pages/Messages";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserPage } from "./pages/UserPage";
 import { Tavern } from "./pages/Tavern";
 import { Forge } from "./pages/Forge";
 import { Palace } from "./pages/Palace";
-import { Logo } from "../components/logo/Logo";
+import { Logo } from "../components/elements/logo/Logo";
 import { Gomoku } from "../components/gomoku/Gomoku";
+import { Icon } from "../components/elements/icon/Icon";
 
 export const MainPage = () => {
   return (
@@ -28,6 +29,8 @@ export const MainPage = () => {
             <Route path="/tavern" element={<Tavern />} />
             <Route path="/gomoku" element={<Gomoku />} />
           </Routes>
+
+      
       
         
         </MainPageWrapper>

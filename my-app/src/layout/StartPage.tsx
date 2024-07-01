@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Logo } from "../components/logo/Logo";
+import { Logo } from "../components/elements/logo/Logo";
 import { Button } from "../components/elements/button/Button";
 
 const StartPageDescription = () => {

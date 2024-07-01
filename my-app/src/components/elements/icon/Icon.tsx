@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import iconsSprite from "../../assets/images/icons-sprite.svg";
-import { theme } from "../../styles/Theme";
+import { theme } from "../../../styles/Theme";
 
 type IconPropsType = {
   iconId: string;
@@ -14,7 +14,7 @@ type IconPropsType = {
 export const Icon: React.FC<IconPropsType> = (props: IconPropsType) => {
   return (
     <StyledIcon
-      fill={props.fill || "pink"}
+      fill={props.fill || "white"}
       width={props.width || "50"}
       height={props.height || "50"}
       viewBox={props.viewBox || "0 0 50 50"}
@@ -26,6 +26,7 @@ export const Icon: React.FC<IconPropsType> = (props: IconPropsType) => {
 
 const StyledIcon = styled.svg`
   &:hover {
+    cursor: pointer;
     transform: translateY(-5px);
     transition: ${theme.animations.transition};
     //transform: scale(1.1);

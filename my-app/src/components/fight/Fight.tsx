@@ -1,59 +1,56 @@
 import { ChangeEvent, useRef, useState } from "react";
 import styled from "styled-components";
 import { v1 } from "uuid";
-import { Button } from "./elements/button/Button";
-import { SuperButton } from "./elements/SuperButton";
+import { Button } from "../elements/button/Button";
+import { Enemy } from "../enemy/Enemy";
 
 //Lists attack & block
 const attacks = [
-  { part: "head", id: v1() },
-  { part: "chest", id: v1() },
-  { part: "groin", id: v1() },
-  { part: "legs", id: v1() },
+  { part: "голова", id: v1() },
+  { part: "грудь", id: v1() },
+  { part: "пах", id: v1() },
+  { part: "ноги", id: v1() },
 ];
 const blocks = [
-  { part: "head_legs", id: v1() },
-  { part: "head_chest", id: v1() },
-  { part: "chest_groin", id: v1() },
-  { part: "groin_legs", id: v1() },
+  { part: "голова-ноги", id: v1() },
+  { part: "голова-грудь", id: v1() },
+  { part: "грудь-пах", id: v1() },
+  { part: "пах-ноги", id: v1() },
 ];
-
-//Object.keys(), Object.values(), Object.entries()
 
 //Rules fight
 enum RulesAttackKeys {
-  HEAD = "head",
-  CHEST = "chest",
-  GROIN = "groin",
-  LEGS = "legs",
+  HEAD = "голова",
+  CHEST = "грудь",
+  GROIN = "пах",
+  LEGS = "ноги",
 }
 
 const rulesAttack = {
-  [RulesAttackKeys.HEAD]: ["chest_groin", "groin_legs"],
-  [RulesAttackKeys.CHEST]: ["head_legs", "groin_legs"],
-  [RulesAttackKeys.GROIN]: ["head_legs", "head_chest"],
-  [RulesAttackKeys.LEGS]: ["head_chest", "chest_groin"],
+  [RulesAttackKeys.HEAD]: ["грудь-пах", "пах-ноги"],
+  [RulesAttackKeys.CHEST]: ["голова-ноги", "пах-ноги"],
+  [RulesAttackKeys.GROIN]: ["голова-ноги", "голова-грудь"],
+  [RulesAttackKeys.LEGS]: ["голова-грудь", "грудь-пах"],
 };
 
 enum RulesBlockKeys {
-  HEAD_LEGS = "head_legs",
-  HEAD_CHEST = "head_chest",
-  CHEST_GROIN = "chest_groin",
-  GROIN_LEGS = "groin_legs",
+  HEAD_LEGS = "голова-ноги",
+  HEAD_CHEST = "голова-грудь",
+  CHEST_GROIN = "грудь-пах",
+  GROIN_LEGS = "пах-ноги",
 }
 
 const rulesBlock = {
-  [RulesBlockKeys.HEAD_LEGS]: ["chest", "groin"],
-  [RulesBlockKeys.HEAD_CHEST]: ["groin", "legs"],
-  [RulesBlockKeys.CHEST_GROIN]: ["head", "legs"],
-  [RulesBlockKeys.GROIN_LEGS]: ["head", "chest"],
+  [RulesBlockKeys.HEAD_LEGS]: ["грудь", "пах"],
+  [RulesBlockKeys.HEAD_CHEST]: ["пах", "ноги"],
+  [RulesBlockKeys.CHEST_GROIN]: ["голова", "ноги"],
+  [RulesBlockKeys.GROIN_LEGS]: ["голова", "грудь"],
 };
 
 export function Fight() {
   let [userHp, setUserHp] = useState(5);
   let [computerHp, setComputerHp] = useState(5);
   let [userXp, setUserXp] = useState(0);
-
   let [buttonFightState, setButtonFightState] = useState(false);
   let [checkedAttackState, setCheckedAttackState] = useState(false);
   let [checkedBlockState, setCheckedBlockState] = useState(false);
@@ -62,9 +59,8 @@ export function Fight() {
   let [resultComputerAttack, setResultComputerAttack] = useState("");
   let [resultUserAttack, setResultUserAttack] = useState("");
   let [numberButtonUnlock, setNumberButtonUnlock] = useState(0);
-
   let [userLvl, setUserLvl] = useState(1);
-  let [fightCounter, setFightCounter]=useState(0);
+  let [fightCounter, setFightCounter] = useState(0);
 
   const levelUp = () => {
     if (userXp > 5) {
@@ -72,23 +68,23 @@ export function Fight() {
     }
   };
 
-  let [resultFight, setResultFight] = useState("start");
+  let [resultFight, setResultFight] = useState("результат поединка");
 
   const winFight = () => {
-    setUserXp((userXp += 5));
+    setUserXp(userXp+5)
     levelUp();
-    setFightCounter(fightCounter++)
-    setResultFight((resultFight = "You win"));
+    setFightCounter(fightCounter++);
+    setResultFight("Ты победил");
   };
 
   const loseFight = () => {
-    setResultFight((resultFight = "You lose"));
-    setFightCounter(fightCounter++)
+    setResultFight("Ты проиграл");
+    setFightCounter(fightCounter++);
   };
 
   const drawFight = () => {
-    setResultFight((resultFight = "Draw"));
-    setFightCounter(fightCounter++)
+    setResultFight("Ничья");
+    setFightCounter(fightCounter++);
   };
 
   const fight = () => {
@@ -99,8 +95,8 @@ export function Fight() {
     if (userHp <= 0 && computerHp > 0) loseFight();
     if (computerHp <= 0 && userHp > 0) winFight();
     if (userHp <= 0 && computerHp <= 0) drawFight();
-    setAttackButtonName("Атака");
-    setBlockButtonName("Защита");
+    setAttackButtonName("Выбери атаку");
+    setBlockButtonName("Выбери блок");
   };
 
   const attack = () => {
@@ -110,17 +106,17 @@ export function Fight() {
     setNumberButtonUnlock(0);
     if (userAttack && rulesAttack?.[userAttack]?.includes(computerBlock)) {
       setResultUserAttack(
-        "User hit! userAttack: " +
+        "Ты попал! Твоя атака: " +
           userAttack +
-          " computerBlock: " +
+          " Блок противника: " +
           computerBlock
       );
       return setComputerHp((computerHp -= 5));
     } else {
       setResultUserAttack(
-        "User miss! userAttack: " +
+        "Ты промахнулся! Твоя атака: " +
           userAttack +
-          " computerBlock: " +
+          " Блок противника: " +
           computerBlock
       );
       return computerHp;
@@ -136,17 +132,17 @@ export function Fight() {
 
     if (userBlock && rulesBlock[userBlock]?.includes(computerAttack)) {
       setResultComputerAttack(
-        "Cpu hit! computerAttack: " +
+        "Противник попал! Атака противника: " +
           computerAttack +
-          " playerBlock: " +
+          " Твой блок: " +
           userBlock
       );
       return setUserHp((userHp -= 5));
     } else {
       setResultComputerAttack(
-        "Cpu miss! computerAttack: " +
+        "Противник промахнулся! Атака противника: " +
           computerAttack +
-          " playerBlock: " +
+          " Твой блок: " +
           userBlock
       );
 
@@ -172,6 +168,7 @@ export function Fight() {
     setBlockButtonName(e.currentTarget.value);
   };
   let [openAttackMenu, setOpenAttackMenu] = useState(false);
+
   const openAttack = () => {
     setOpenAttackMenu(!openAttackMenu);
   };
@@ -181,23 +178,14 @@ export function Fight() {
     setOpenBlockMenu(!openBlockMenu);
   };
 
-  let [attackButtonName, setAttackButtonName] = useState("Атака");
+  let [attackButtonName, setAttackButtonName] = useState("Выбери атаку");
 
-  let [blockButtonName, setBlockButtonName] = useState("Защита");
+  let [blockButtonName, setBlockButtonName] = useState("Выбери блок");
 
   return (
     <FightStyle>
-      <div>
-        <img
-          src="https://e7.pngegg.com/pngimages/912/93/png-clipart-samurai-japan-illustration-katana-ninja-lesson-samurai-photography-eps.png"
-          alt="warrior"
-          height={"350px"}
-        />
-
-        <p>Противник</p>
-        <p>Класс проитвника</p>
-        <p>Статы проитвника</p>
-      </div>
+      <Enemy enemyImage={"https://e7.pngegg.com/pngimages/912/93/png-clipart-samurai-japan-illustration-katana-ninja-lesson-samurai-photography-eps.png"} enemyName={"Имя противника - Санджин"} enemyClass={"Класс противника - Ёкай"} enemyStats={"1 1 0 0"}/>
+     
       <FightInformation>
         <table>
           <thead>
@@ -262,19 +250,17 @@ export function Fight() {
             })}
           <Button name={blockButtonName} callBack={openBlock} />
         </Blocks>
-<SuperButton name={"Fight"} callBack={fight} disabled={!buttonFightState}/>
-     
       </FightState>
+      <Button name={"В бой"} callBack={fight} disabled={!buttonFightState} />
     </FightStyle>
   );
 }
 
 const FightStyle = styled.div``;
 
-const FightInformation = styled.div`
 
 
-`;
+const FightInformation = styled.div``;
 
 const FightState = styled.div`
   margin: 0;
@@ -292,7 +278,6 @@ const Attacks = styled.ul`
   width: 50%;
   list-style-type: none;
 
-
   label {
     text-align: center;
     margin: 5px;
@@ -304,7 +289,7 @@ const Attacks = styled.ul`
     cursor: pointer;
     color: #a3957a;
     border: 2px solid #a3957a;
-    &:hover{
+    &:hover {
       color: #b0403c;
       border: 2px solid #b0403c;
     }
@@ -335,7 +320,7 @@ const Blocks = styled.ul`
     cursor: pointer;
     color: #a3957a;
     border: 2px solid #a3957a;
-    &:hover{
+    &:hover {
       color: #b0403c;
       border: 2px solid #b0403c;
     }
