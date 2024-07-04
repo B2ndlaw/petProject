@@ -14,10 +14,11 @@ import { Icon } from "../components/elements/icon/Icon";
 export const MainPage = () => {
   return (
     <>
-    <Logo/>
+    
 
       <BrowserRouter>
         <MainPageWrapper>
+          <Logo/>
           <Hero href="/hero"><img src="https://pngset.com/images/clip-art-skeleton-samurai-samurai-head-poster-advertisement-armor-batman-transparent-png-1368627.png" width={"100px"}/></Hero>
           <Messages />{" "}
           <Routes>
@@ -40,19 +41,25 @@ export const MainPage = () => {
   );
 };
 
-const Hero = styled.a`
-  position: absolute;
-  right: 0;
-  top: 0;
-background-color: white;
-`
 
-const MainPageWrapper = styled.div`
+
+const MainPageWrapper = styled.section`
+position: relative;
 height:100vh;
 max-width: 400px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  border: 12px solid #a3957a;
+  border: 12px solid #b0a1a1;
+  z-index: 1;
   
 `;
+
+const Hero = styled.a`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+background-color: white;
+z-index:2;
+`

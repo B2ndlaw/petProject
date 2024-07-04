@@ -200,12 +200,11 @@ export function Fight() {
               <td>{computerHp}</td>
             </tr>
           </tbody>
-        </table>
-        <div>{resultUserAttack}</div>
+        </table> 
+       <div>{resultUserAttack}</div>
         <div>{resultComputerAttack}</div>
         <div>{resultFight}</div>
-        <p>{userLvl}</p>
-        <p>{fightCounter}</p>
+  
       </FightInformation>
 
       <FightState>
@@ -229,7 +228,6 @@ export function Fight() {
             })}
           <Button name={attackButtonName} callBack={openAttack} />
         </Attacks>
-
         <Blocks>
           {openBlockMenu &&
             blocks.map((b) => {
@@ -250,8 +248,10 @@ export function Fight() {
             })}
           <Button name={blockButtonName} callBack={openBlock} />
         </Blocks>
+
       </FightState>
       <Button name={"В бой"} callBack={fight} disabled={!buttonFightState} />
+    
     </FightStyle>
   );
 }
@@ -260,12 +260,21 @@ const FightStyle = styled.div``;
 
 
 
-const FightInformation = styled.div``;
+const FightInformation = styled.div`
+width:auto;
+height: 20vh;
+background-color: #966c6c;
+`;
+
+
 
 const FightState = styled.div`
   margin: 0;
   padding: 0;
   position: relative;
+background-color: #e1bdbd;
+
+height: 50px;
 `;
 
 const Attacks = styled.ul`

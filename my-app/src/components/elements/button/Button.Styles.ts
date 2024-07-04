@@ -12,7 +12,7 @@ const Button = styled.button`
   color: #a3957a;;
   cursor: pointer;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
-  font-weight: 600;
+  
   &:hover{
     border: 2px solid #b0403c;
     color: #b0403c;

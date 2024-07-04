@@ -42,12 +42,15 @@ export const Messages = () => {
 
 const StylesMessages = styled.div`
 position: absolute;
-bottom:0;
-left: 0;
+top:0;
+right: 0;
+z-index: 2;
+
 
   display: inline-block;
 button{
   background-color: gold;
+  height: 30px;
 }
 `;
 

@@ -30,17 +30,7 @@ const NavMenuItem = styled.a`
   border-radius: 10px;
   color: #7b90a4;
 
-&:first-child{
-margin-right: 20px;
-}
 
-&:nth-child(2){
-margin-right: 70px;
-}
-
-&:last-child{
-margin-right: 130px;
-}
 
   &:active {
     border: 2px solid white;

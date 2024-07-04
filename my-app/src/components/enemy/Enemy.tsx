@@ -27,7 +27,7 @@ const EnemyName = styled.h4`
   
 `
 const EnemyImg = styled.img`
-  width: 300px;
+  width: 150px;
 `
 
 const EnemyClass = styled.p`
