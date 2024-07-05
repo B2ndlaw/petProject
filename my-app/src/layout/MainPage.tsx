@@ -19,7 +19,7 @@ export const MainPage = () => {
       <BrowserRouter>
         <MainPageWrapper>
           <Logo/>
-          <Hero href="/hero"><img src="https://pngset.com/images/clip-art-skeleton-samurai-samurai-head-poster-advertisement-armor-batman-transparent-png-1368627.png" width={"100px"}/></Hero>
+          <Hero href="/hero"><Icon iconId={"hero"} viewBox="0 0 512 512" width="200px" height="200px"/></Hero>
           <Messages />{" "}
           <Routes>
             {" "}
@@ -50,7 +50,7 @@ max-width: 400px;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-  border: 12px solid #b0a1a1;
+  /* border: 12px solid #b0a1a1; */
   z-index: 1;
   
 `;
@@ -60,6 +60,6 @@ const Hero = styled.a`
   left: 0;
   bottom: 0;
 
-background-color: white;
+
 z-index:2;
 `

@@ -22,4 +22,8 @@ const LogoStyle = styled.div`
   color:rgb(100%, 0%, 0%);
   z-index: 2;
 
+  h1{
+    color: white;
+  }
+
 `

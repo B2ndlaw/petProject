@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { v1 } from "uuid";
+import { Icon } from "../../components/elements/icon/Icon";
 
 //Data
 export const Messages = () => {
@@ -30,7 +31,8 @@ export const Messages = () => {
     <StylesMessages>
       {/* <Input titleNewMessage={titleNewMessage} setTitleNewMessage={setTitleNewMessage} />
       <Button name="+" callBack={onClickHandlerAddMessage} /> */}
-<button>message</button>
+<a><Icon iconId="envelope" viewBox="0 0 512 512" fill={2==2?"white":"red"}/></a>
+
 
 
       {/* {message.map((m) => {
@@ -49,8 +51,7 @@ z-index: 2;
 
   display: inline-block;
 button{
-  background-color: gold;
-  height: 30px;
+
 }
 `;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import iconsSprite from "../../assets/images/icons-sprite.svg";
+import iconsSprite from "./../../../assets/images/icons-sprite.svg"
 import { theme } from "../../../styles/Theme";
 
 type IconPropsType = {

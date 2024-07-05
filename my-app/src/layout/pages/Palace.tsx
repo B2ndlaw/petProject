@@ -28,4 +28,17 @@ export const Palace = () => {
 const PalaceStyle = styled.section`
   background-color: #734343;
   width: 100%;
+ align-items: center;
+  justify-content: center;
+  display: flex;
+  h2{
+    display: block;
+    height: 15vh;
+    font-size: 40px;
+  }
+
+  p{
+    display: block;
+    height: 45vh;
+  }
 `;

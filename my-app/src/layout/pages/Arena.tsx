@@ -25,7 +25,7 @@ export function Arena() {
 
 //Styles
 const StylesArena = styled.section`
-background-color: #734343;
+/* background-color: #734343; */
 width: 100%;
 height: 100%;
 position: relative;

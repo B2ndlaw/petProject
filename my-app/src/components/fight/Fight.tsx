@@ -274,7 +274,7 @@ const FightState = styled.div`
   position: relative;
 background-color: #e1bdbd;
 
-height: 50px;
+height: 150px;
 `;
 
 const Attacks = styled.ul`
