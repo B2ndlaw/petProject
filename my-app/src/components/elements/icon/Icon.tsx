@@ -14,7 +14,7 @@ type IconPropsType = {
 export const Icon: React.FC<IconPropsType> = (props: IconPropsType) => {
   return (
     <StyledIcon
-      fill={props.fill || "white"}
+      fill={props.fill || "rgba(255,255,255,0.5)"}
       width={props.width || "50"}
       height={props.height || "50"}
       viewBox={props.viewBox || "0 0 50 50"}
@@ -27,7 +27,7 @@ export const Icon: React.FC<IconPropsType> = (props: IconPropsType) => {
 const StyledIcon = styled.svg`
   &:hover {
     cursor: pointer;
-    transform: translateY(-5px);
+    fill: white;
     transition: ${theme.animations.transition};
     //transform: scale(1.1);
   }

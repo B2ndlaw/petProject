@@ -10,6 +10,8 @@ import { Palace } from "./pages/Palace";
 import { Logo } from "../components/elements/logo/Logo";
 import { Gomoku } from "../components/gomoku/Gomoku";
 import { Icon } from "../components/elements/icon/Icon";
+import { StartPage } from "./pages/StartPage";
+import { FirstFight } from "./pages/FirstFight";
 
 export const MainPage = () => {
   return (
@@ -19,10 +21,12 @@ export const MainPage = () => {
       <BrowserRouter>
         <MainPageWrapper>
           <Logo/>
-          <Hero href="/hero"><Icon iconId={"hero"} viewBox="0 0 512 512" width="200px" height="200px"/></Hero>
+          <Hero href="/hero"><Icon iconId={"hero"} viewBox="0 0 512 512" width="160px" height="160px" fill={2==2?"":"red"}/></Hero>
           <Messages />{" "}
           <Routes>
             {" "}
+            <Route path="" element={<StartPage/>}/>
+            <Route path="/firstfight" element={<FirstFight/>}/>
             <Route path="/palace" element={<Palace />} />
             <Route path="/hero" element={<UserPage />} />
             <Route path="/arena" element={<Arena />} />
@@ -46,12 +50,12 @@ export const MainPage = () => {
 const MainPageWrapper = styled.section`
 position: relative;
 height:100vh;
-max-width: 400px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  /* border: 12px solid #b0a1a1; */
-  z-index: 1;
+max-width: 1024px;
+margin: 0 auto;
+display: flex;
+
+z-index: 1;
+
   
 `;
 

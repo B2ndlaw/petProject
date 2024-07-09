@@ -62,6 +62,8 @@ export function Fight() {
   let [userLvl, setUserLvl] = useState(1);
   let [fightCounter, setFightCounter] = useState(0);
 
+  
+
   const levelUp = () => {
     if (userXp > 5) {
       setUserLvl((userLvl += 1));
@@ -214,6 +216,7 @@ export function Fight() {
               return (
                 <li key={a.id}>
                   <input
+                 
                     onChange={onChangeAttackHandler}
                     type="radio"
                     name="radioAttack"
@@ -221,6 +224,7 @@ export function Fight() {
                     value={a.part}
                     id={a.id}
                     onClick={openAttack}
+                 
                   />
                   <label htmlFor={a.id}>{a.part}</label>
                 </li>

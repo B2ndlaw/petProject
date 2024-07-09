@@ -31,7 +31,7 @@ export const Messages = () => {
     <StylesMessages>
       {/* <Input titleNewMessage={titleNewMessage} setTitleNewMessage={setTitleNewMessage} />
       <Button name="+" callBack={onClickHandlerAddMessage} /> */}
-<a><Icon iconId="envelope" viewBox="0 0 512 512" fill={2==2?"white":"red"}/></a>
+<a><Icon iconId="envelope" viewBox="0 0 512 512" fill={2==2?"":"red"}/></a>
 
 
 
