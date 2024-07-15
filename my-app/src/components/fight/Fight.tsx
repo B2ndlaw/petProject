@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { v1 } from "uuid";
 import { Button } from "../elements/button/Button";
 import { Enemy } from "../enemy/Enemy";
+import { Hp } from "../../layout/pages/UserPage";
 
 //Lists attack & block
 const attacks = [
@@ -48,21 +49,26 @@ const rulesBlock = {
 };
 
 export function Fight() {
-  let [userHp, setUserHp] = useState(5);
+  let [userHp, setUserHp] = useState(Hp);
   let [computerHp, setComputerHp] = useState(5);
   let [userXp, setUserXp] = useState(0);
-  let [buttonFightState, setButtonFightState] = useState(false);
-  let [checkedAttackState, setCheckedAttackState] = useState(false);
-  let [checkedBlockState, setCheckedBlockState] = useState(false);
+  let [buttonFightState, setButtonFightState] = useState(true);
+  // let [checkedAttackState, setCheckedAttackState] = useState(false);
+  // let [checkedBlockState, setCheckedBlockState] = useState(false);
   let [userAttack, setUserAttack] = useState<RulesAttackKeys | null>(null);
   let [userBlock, setUserBlock] = useState<RulesBlockKeys | null>(null);
   let [resultComputerAttack, setResultComputerAttack] = useState("");
   let [resultUserAttack, setResultUserAttack] = useState("");
-  let [numberButtonUnlock, setNumberButtonUnlock] = useState(0);
+  // let [numberButtonUnlock, setNumberButtonUnlock] = useState(0);
   let [userLvl, setUserLvl] = useState(1);
   let [fightCounter, setFightCounter] = useState(0);
 
-  
+  const unlockFightButton = () => {
+
+if(userBlock!=null || userAttack!=null) {
+  setButtonFightState(false)
+} 
+  }
 
   const levelUp = () => {
     if (userXp > 5) {
@@ -70,7 +76,7 @@ export function Fight() {
     }
   };
 
-  let [resultFight, setResultFight] = useState("результат поединка");
+  let [resultFight, setResultFight] = useState("");
 
   const winFight = () => {
     setUserXp(userXp+5)
@@ -104,8 +110,8 @@ export function Fight() {
   const attack = () => {
     let computerBlock = blocks[Math.floor(Math.random() * blocks.length)].part;
     setButtonFightState(false);
-    setCheckedAttackState(false);
-    setNumberButtonUnlock(0);
+    // setCheckedAttackState(false);
+    // setNumberButtonUnlock(0);
     if (userAttack && rulesAttack?.[userAttack]?.includes(computerBlock)) {
       setResultUserAttack(
         "Ты попал! Твоя атака: " +
@@ -130,7 +136,7 @@ export function Fight() {
       attacks[Math.floor(Math.random() * attacks.length)].part;
 
     setButtonFightState(false);
-    setCheckedBlockState(false);
+    // setCheckedBlockState(false);
 
     if (userBlock && rulesBlock[userBlock]?.includes(computerAttack)) {
       setResultComputerAttack(
@@ -154,20 +160,22 @@ export function Fight() {
 
   const onChangeAttackHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUserAttack(e.currentTarget.value as RulesAttackKeys);
-    setCheckedAttackState(true);
-    setNumberButtonUnlock((numberButtonUnlock += 1));
-    setButtonFightState(checkedBlockState);
+    // setCheckedAttackState(true);
+    // setNumberButtonUnlock((numberButtonUnlock += 1));
+    // setButtonFightState(checkedBlockState);
     setOpenAttackMenu(!openAttackMenu);
     setAttackButtonName(e.currentTarget.value);
+    unlockFightButton()
   };
 
   const onChangeBlockHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUserBlock(e.currentTarget.value as RulesBlockKeys);
-    setNumberButtonUnlock((numberButtonUnlock += 1));
-    setButtonFightState(checkedAttackState);
-    setCheckedBlockState(true);
+    // setNumberButtonUnlock((numberButtonUnlock += 1));
+    // setButtonFightState(checkedAttackState);
+    // setCheckedBlockState(true);
     setOpenBlockMenu(!openBlockMenu);
     setBlockButtonName(e.currentTarget.value);
+    unlockFightButton()
   };
   let [openAttackMenu, setOpenAttackMenu] = useState(false);
 
@@ -186,7 +194,7 @@ export function Fight() {
 
   return (
     <FightStyle>
-      <Enemy enemyImage={"https://e7.pngegg.com/pngimages/912/93/png-clipart-samurai-japan-illustration-katana-ninja-lesson-samurai-photography-eps.png"} enemyName={"Имя противника - Санджин"} enemyClass={"Класс противника - Ёкай"} enemyStats={"1 1 0 0"}/>
+      {/* <Enemy enemyImage={"https://e7.pngegg.com/pngimages/912/93/png-clipart-samurai-japan-illustration-katana-ninja-lesson-samurai-photography-eps.png"} enemyName={"Имя противника - Санджин"} enemyClass={"Класс противника - Ёкай"} enemyStats={} enemyHp={5}/> */}
      
       <FightInformation>
         <table>
@@ -254,7 +262,7 @@ export function Fight() {
         </Blocks>
 
       </FightState>
-      <Button name={"В бой"} callBack={fight} disabled={!buttonFightState} />
+      <Button name={"В бой"} callBack={fight} disabled={buttonFightState} />
     
     </FightStyle>
   );

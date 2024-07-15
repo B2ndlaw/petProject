@@ -35,7 +35,7 @@ type Story = StoryObj<typeof Select>;
 //   },
 // };
 
-export const Attack = () => {
+export const AttackSelect = () => {
 const [value, setValue] = useState("Выбери атаку");
 return( 
 <Select value={value} 
@@ -49,7 +49,7 @@ return(
 )
 }
 
-export const Block = () => {
+export const BlockSelect = () => {
   const [value, setValue] = useState("Выбери блок");
   return( 
   <Select value={value} 

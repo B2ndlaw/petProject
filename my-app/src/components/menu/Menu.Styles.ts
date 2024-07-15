@@ -1,57 +1,40 @@
 import styled from "styled-components";
+import { theme } from "../../styles/Theme";
 
-const Menu=styled.section`
-position: absolute;
-right: 0;
-bottom: 0;
-
-  width: 50%;
-  height: 20%
-`
-
-const NavMenu = styled.nav`
-display: flex;
-flex-direction: column;
-
-justify-content: space-around;
-
-  height: 100%;
+const Menu = styled.section`
 `;
+
+const NavMenu = styled.nav``;
 
 const NavMenuItem = styled.a`
 
+  margin: 30px;
   display: block;
-  width:100%;
-
+width: 200px;
   padding: 5px;
   text-decoration: none;
-  text-align: right;
-
-  color: white;
-  font-size: 20px;
-
-  opacity: 0.5;
+  text-align: center;
 
 
-  transition: all 0.1s ease-in-out;
-  /* border: 2px solid white;
-  border-radius: 10px; */
- 
+  color: ${theme.colors.primaryFont};
+  font-size: 30px;
+
+  transition: ${theme.animations.transition};
+  border: 2px solid ${theme.colors.primaryFont};
+  border-radius: 10px;
 
 
 
   &:active {
-
   }
   &:hover {
-    opacity: 1;
+    color: ${theme.colors.primaryFont};
+    border: 2px solid ${theme.colors.primaryFont};
   }
 `;
 
 export const S = {
   Menu,
   NavMenu,
-  NavMenuItem
-
-
-}
+  NavMenuItem,
+};

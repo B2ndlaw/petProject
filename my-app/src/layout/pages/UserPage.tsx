@@ -2,29 +2,45 @@ import { useState } from "react";
 import { v1 } from "uuid";
 import { Menu } from "../../components/menu/Menu";
 import styled from "styled-components";
+import { FlexWrapper } from "../../components/FlexWrapper";
+import { Icon } from "../../components/elements/icon/Icon";
 
 const menuItems = [
 
-  { name: "Навыки", href: "", id: v1() },
-  { name: "Снаряжение", href: "", id: v1() },
-  { name: "Статы", href: "", id: v1() },
+  { name: "Назад", href: "/homePage", id: v1() },
+
 ];
 
 type UserType = {
-  //Authorization
-  email: string;
-  login: string;
-  password: string;
-  role: string;
-  //Game data
-  nickName: string;
-  isLogin: boolean;
-  class: "samurai" | "ronin" | "ony";
-  gender: string;
-  level: number;
-  experience: number;
-  coin: number;
+  // //Authorization
+  // email: string;
+  // login: string;
+  // password: string;
+  // role: string;
+  // //Game data
+  name: string;
+  // isLogin: boolean;
+  class: "Ронин" | "Самурай" | "Демон";
+  // gender: string;
+  // level: number;
+  // experience: number;
+  // coin: number;
+  Hp: number
 };
+
+
+
+const User: UserType = {
+  name: "Хадзиро",
+  class: "Ронин",
+  Hp: 5,
+}
+
+export let {Hp} = User;
+  
+
+ 
+
 
 export const UserPage = () => {
   let [userHp, setUserHp] = useState(5);
@@ -37,56 +53,36 @@ export const UserPage = () => {
   };
 
   return (
-    <UserPageStyle>
-      <h2>Samurai</h2>
-      <img
-        src="https://e7.pngegg.com/pngimages/912/93/png-clipart-samurai-japan-illustration-katana-ninja-lesson-samurai-photography-eps.png"
-        alt="warrior"
-        height={"350px"}
-      />
-<h3>Имя: Саганоши Мавара</h3>
+    <FlexWrapper background={"url(https://img.freepik.com/premium-photo/samurai-art_551707-29679.jpg?w=2000)"}>
+  
+<h3>Имя: {User.name}</h3>
       <div>
-        <p>класс-ронин</p>
-        <p>клан</p>
-        <p>уровень-{userLvl}</p>
-        <p>опыт-{userXp}</p>
-      </div>
+        <p>Класс: {User.class}</p>
 
-      <h4>Инвентарь-кнопка</h4>
-      <div>
-        <p>дайсе:</p>
-        <p>дайто-{dayse.dayto}</p>
-        <p>сето-{dayse.seto}</p>
+        <p>Уровень: {userLvl}</p>
+        <p>Опыт: {userXp}</p>
       </div>
-
-      <h4>Навыки-кнопка</h4>
-      <p>крит-5%</p>
-      <p>уворот-1%</p>
       <p>
-        Сила: 3 +1 +10 +100 (3+0) Ловкость: 4 +1 +10 +100 (4+0) Выносливость:
-        137 +1 +10 +100 (137+0)
+      Всего боев: 0 Побед: 0 Поражений: 0 (0 по таймауту) Ничьих: 0 
       </p>
 
-      {/* <h4>Статы</h4>
-      <p>атака-5-12</p>
-      <p>защита-0 0 0 0</p>
+
+
+      <p> <Icon iconId="katana" viewBox="0 0 600 600" width="20px" height="20px"/>5-12</p>
+      <p><Icon iconId="shield" viewBox="0 0 24 24" width="20px" height="20px" fill="none"/>0 0 0 0</p>
     
-      <p>здоровье-{userHp}</p>
+      <p><Icon iconId="heart" viewBox="0 0 24 24" width="20px" height="20px" fill="none"/>{userHp}</p>
+
+      <p><Icon iconId="coin" viewBox="0 0 24 24" width="20px" height="20px"/>0мон</p>
    
-      <h4>Статистика</h4>
-      <p>
-        Побед: 0 Поражений: 0 (0 по таймауту) Ничьих: 0 Всего боев: 0 Убил
-        монстров: 0
-      </p>
-      <p>кошелек-40мон</p> */}
+  
+      
+    
 
       <Menu menuItems={menuItems}/>
-    </UserPageStyle>
+    </FlexWrapper>
   );
 };
 
 
-const UserPageStyle = styled.section`
-  background-color: #734343;
-  width: 100%;
-`;
+

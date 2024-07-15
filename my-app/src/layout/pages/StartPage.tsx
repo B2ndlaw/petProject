@@ -14,17 +14,17 @@ export const StartPage = () => {
 
       <StartDescription>
         {" "}
-        <p>
+        {/* <p>
           Ты стоишь перед каменным домом с деревянной крышей. Из окон доносятся{" "}
           {text[Math.floor(Math.random() * text.length)]}.
         </p>
         <p>
           На массивной входной двери из досок ты видишь табличку с надписью
           "Открыто"
-        </p>
+        </p> */}
         
       </StartDescription>
-      <a href="/firstfight">Войти</a>
+      <a href="/homePage">Войти</a>
     </StartPageStyle>
   );
 };
@@ -45,6 +45,7 @@ flex-direction: column;
     padding: 2px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 5px;
+    padding: 5px 10px;
     @keyframes glowing {
       0% {
         box-shadow: 0 0 5px #b0afaf;
@@ -66,9 +67,9 @@ flex-direction: column;
 `;
 
 const Title = styled.h1`
-  color: red;
+  color: #ffffff;
   font-weight: bold;
-  font-size: 10vw;
+  font-size: 50px;
 `;
 
 const StartDescription = styled.div`

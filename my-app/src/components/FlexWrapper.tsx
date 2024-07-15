@@ -1,18 +1,22 @@
 import styled from "styled-components";
 
 
+type FlexWrapperPropsType = {
+  background?: string
+}
 
 
-
-export const FlexWrapper = styled.section`
+export const FlexWrapper = styled.section<FlexWrapperPropsType>`
 
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   background-color: #734343;
-  height: 100%;
+  background: ${props=>props.background} center/cover no-repeat;
 
+  width: 100%;
+ 
 
 
 `;

@@ -1,20 +1,18 @@
 import styled from "styled-components";
+import { EnemyType } from "../../layout/pages/FirstFight";
 
-type EnemyType = {
-  enemyImage: string;
-  enemyName: string;
-  enemyClass: string;
-  enemyStats: string
-};
+
+
+
 
 export function Enemy(props: EnemyType) {
   return (
     <StyledEnemy>
-      <EnemyName>{props.enemyName}</EnemyName>
+      <EnemyName>Имя: {props.enemyName}</EnemyName>
       <EnemyImg src={props.enemyImage}  alt="warrior" />
 
-      <EnemyClass>{props.enemyClass}</EnemyClass>
-      <EnemyStats>{props.enemyStats}</EnemyStats>
+      <EnemyClass>Класс: {props.enemyClass}</EnemyClass>
+      <EnemyHp>Здоровье: {props.enemyHp}</EnemyHp>
     </StyledEnemy>
   );
 }
@@ -34,6 +32,6 @@ const EnemyClass = styled.p`
   
 `
 
-const EnemyStats = styled.p`
+const EnemyHp = styled.p`
   
 `
